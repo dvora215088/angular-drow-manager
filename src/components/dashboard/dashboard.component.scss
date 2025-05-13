@@ -1,0 +1,171 @@
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 40px;
+  font-family: 'Assistant', sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 24px;
+  color: #7f8c8d;
+  font-weight: 300;
+}
+
+// Modified to center the cards
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; // Centers the cards
+  gap: 30px;
+  max-width: 1400px; // Slightly wider
+  margin: 0 auto;
+}
+
+.option-card {
+  background: white;
+  width: 400px; // Original width
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  animation: slideUp 0.5s ease-out;
+  margin: 0 15px; // Added margin for spacing
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.card-header {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon {
+  z-index: 2;
+  position: relative;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: white;
+    opacity: 0.9;
+  }
+}
+
+.card-content {
+  padding: 30px;
+  text-align: center;
+
+  h2 {
+    font-size: 26px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #7f8c8d;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+.blue-gradient {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+}
+
+.green-gradient {
+  background: linear-gradient(45deg, #e7a1d6, #e7a1d6);
+}
+
+.gray-gradient {
+  background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+}
+
+.color-drop {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  opacity: 0.15;
+  filter: blur(2px);
+  z-index: 1;
+}
+
+.blue-drop {
+  background: #3498db;
+  bottom: -30px;
+  right: -30px;
+}
+
+.green-drop {
+  background: #e7a1d6;
+  bottom: -30px;
+  right: -30px;
+}
+
+.gray-drop {
+  background: #95a5a6;
+  bottom: -30px;
+  right: -30px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1300px) {
+  .grid-container {
+    max-width: 900px; // Narrower on medium screens
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+  
+  .option-card {
+    width: 100%; // Full width on mobile
+    max-width: 400px; // But capped at the original size
+    margin: 0 auto 20px;
+  }
+}

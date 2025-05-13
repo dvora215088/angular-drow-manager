@@ -1,0 +1,191 @@
+<div class="worksheets-container" dir="rtl">
+  <div class="title-section">
+    <h2 class="main-title">גיליונות עבודה</h2>
+    <span class="title-decoration"></span>
+  </div>
+  
+  @if (successMessage) {
+    <div class="message-box success-message">
+      <svg class="message-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>{{ successMessage }}</span>
+      <button class="message-close" (click)="clearMessage('success')">×</button>
+    </div>
+  }
+  
+  <!-- הודעת שגיאה -->
+  @if (errorMessage) {
+    <div class="message-box error-message">
+      <svg class="message-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ errorMessage }}</span>
+      <button class="message-close" (click)="clearMessage('error')">×</button>
+    </div>
+  }
+  
+  <!-- טעינה -->
+  @if (isLoading) {
+    <div class="loading-container">
+      <span class="loading-dot dot-1"></span>
+      <span class="loading-dot dot-2"></span>
+      <span class="loading-dot dot-3"></span>
+    </div>
+  }
+  
+  @if (!isLoading && worksheets) {
+    <div class="filters-section">
+      <div class="filters-left">
+        <div class="filter-group">
+          <label class="filter-label">קטגוריה</label>
+          <select class="elegant-select" [(ngModel)]="selectedCategory" (change)="filterWorksheets()">
+            <option value="">הכל</option>
+            @for (category of categories; track category) {
+              <option [value]="category">{{ category }}</option>
+            }
+          </select>
+          <span class="select-arrow">▼</span>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">מיון לפי</label>
+          <select class="elegant-select" [(ngModel)]="sortOption" (change)="sortWorksheets()">
+            <option value="rating">דירוג (מהגבוה לנמוך)</option>
+            <option value="title">כותרת (א-ת)</option>
+            <option value="category">קטגוריה</option>
+          </select>
+          <span class="select-arrow">▼</span>
+        </div>
+      </div>
+      
+      <div class="filters-right">
+        <div class="filters-count">מציג <span class="count-highlight">{{ filteredWorksheets.length }}</span> מתוך <span class="count-highlight">{{ worksheets.length }}</span> גיליונות</div>
+      </div>
+    </div>
+    
+    <div class="worksheets-list">
+      @for (sheet of filteredWorksheets; track sheet) {
+        <div class="worksheet-item">
+          <!-- כותרת וקטגוריה -->
+          <div class="worksheet-header">
+            <div class="worksheet-category" [ngClass]="'cat-' + sheet.categoryName"></div>
+            <h3 class="worksheet-title">{{ sheet.title }}</h3>
+            <!-- כפתור מחיקה -->
+            <button class="delete-button" (click)="openDeleteModal(sheet)" aria-label="מחק גיליון">
+              <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+          
+          <!-- פרטים נוספים -->
+          <div class="worksheet-details">
+            <div class="meta-category">
+              <span class="category-dot" ></span>
+              {{ sheet.categoryName }}
+            </div>
+            
+            <div class="meta-rating">
+              <div class="rating-stars">
+                ★★★★★
+                <div class="stars-filled" [style.width.%]="(sheet.averageRating / 5) * 100">★★★★★</div>
+              </div>
+              <span class="rating-value">{{ sheet.averageRating.toFixed(1) }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <button class="elegant-button" [routerLink]="['/fileUpload']" matTooltip="להוספת ציור">
+      <mat-icon>brush</mat-icon>
+    </button>
+    <!-- גרף התפלגות דירוגים -->
+    <div class="stats-section">
+      <div class="stats-left">
+        <h4 class="stats-title">
+          <svg class="stats-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          התפלגות דירוגים
+        </h4>
+        <div class="ratings-list">
+          @for (stars of [5, 4, 3, 2, 1]; track stars) {
+            <div class="rating-bar">
+              <div class="bar-label">
+                <span class="star-icon">★</span>
+                {{ stars }}
+              </div>
+              <div class="bar-container">
+                <div [class]="'bar-fill bar-fill-' + stars"
+                     [style.width.%]="getRatingPercentage(stars)">
+                </div>
+              </div>
+              <div class="bar-count">
+                {{ getRatingCount(stars) }}
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      
+      <div class="stats-right">
+        <div class="avg-stars">★★★★★</div>
+        <div class="avg-label">דירוג ממוצע</div>
+      </div>
+    </div>
+  }
+  
+
+</div>
+
+<!-- מודל מחיקה -->
+<div class="modal-overlay" [class.active]="isDeleteModalOpen" (click)="closeDeleteModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">אישור מחיקה</h3>
+      <button class="modal-close" (click)="closeDeleteModal()">×</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="delete-icon-container">
+        <svg class="delete-modal-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+        <span class="pulse-ring"></span>
+      </div>
+      
+      <p class="delete-message">
+        האם אתה בטוח שברצונך למחוק את הגיליון 
+        <strong class="delete-worksheet-title">{{ worksheetToDelete?.title }}</strong>?
+      </p>
+      <p class="delete-warning">פעולה זו אינה ניתנת לביטול.</p>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="modal-button cancel-button" (click)="closeDeleteModal()" [disabled]="isDeleting">ביטול</button>
+      <button class="modal-button confirm-button" (click)="confirmDelete()" [disabled]="isDeleting">
+        <span class="button-text" [class.hidden]="isDeleting">מחק גיליון</span>
+        @if (isDeleting) {
+          <div class="button-loader">
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+          </div>
+        }
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

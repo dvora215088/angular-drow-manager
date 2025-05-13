@@ -1,0 +1,183 @@
+// ייבוא הפונט
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Assistant', sans-serif;
+  direction: rtl;
+}
+
+\* {
+  box-sizing: border-box;
+}
+/* הוספת סגנונות גלובליים למערכת */
+
+/* ייבוא פונטים */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+
+/* איפוס בסיסי */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  background-color: #f8f9fa;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* קביעת קלאס גלובלי לאנימציות נפוצות */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* התאמות לקומפוננטות של Material */
+.mat-mdc-form-field {
+  font-family: 'Rubik', sans-serif !important;
+}
+
+.mat-mdc-card {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-outlined-button {
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* התאמה לכפתורים צפים */
+.mat-mdc-fab.mat-primary, .mat-mdc-mini-fab.mat-primary {
+  background-color: #1E88E5 !important;
+}
+
+.mat-mdc-fab.mat-accent, .mat-mdc-mini-fab.mat-accent {
+  background-color: #f4b2db !important;
+}
+
+/* חלונית דיאלוג יפה יותר */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* צבעים מותאמים לקלט */
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-ripple {
+  background-color: #1E88E5 !important;
+}
+
+/* סגנון לטבלאות */
+.mat-mdc-table {
+  background-color: transparent !important;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mat-mdc-header-cell {
+  background-color: #f4f7fa !important;
+  color: #5a6a85 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px;
+}
+
+.mat-mdc-row:hover {
+  background-color: #f9fbfd !important;
+}
+
+/* אנימציות מעבר */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* שיפור נראות הלחצנים המצוירים */
+.mat-icon-button.mat-primary {
+  color: #1E88E5 !important;
+}
+
+.mat-icon-button.mat-accent {
+  color: #f4b2db !important;
+}
+
+.mat-icon-button.mat-warn {
+  color: #f44336 !important;
+}
+
+/* עיצוב לתפריטי נפתחים */
+.mat-mdc-menu-panel {
+  border-radius: 8px !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-menu-item {
+  font-family: 'Rubik', sans-serif !important;
+}
+
+/* התאמת כרטיסי מידע ריקים */
+.empty-state-container {
+  padding: 32px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 20px 0;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  color: #8c9da8;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.empty-state-title {
+  font-size: 18px;
+  color: #5a6a85;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.empty-state-text {
+  color: #788896;
+  font-size: 14px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* התאמות לתצוגה במכשירים ניידים */
+@media (max-width: 768px) {
+  .responsive-container {
+    padding: 16px;
+  }
+  
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

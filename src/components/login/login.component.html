@@ -1,0 +1,109 @@
+<div class="login-container">
+    <!-- האנימציה של הרקע -->
+    <div class="background-elements">
+      <div class="gradient-circle circle-1"></div>
+      <div class="gradient-circle circle-2"></div>
+      <div class="gradient-circle circle-3"></div>
+      <div class="dots-pattern"></div>
+    </div>
+  
+    <!-- כרטיס התחברות -->
+    <mat-card class="login-card" [@fadeIn]>
+      <!-- לוגו -->
+      <div class="logo-container" [@scaleIn]>
+        <div class="logo-circle">
+          <img src="assets/logo.png" alt="Logo" class="logo">
+        </div>
+      </div>
+  
+      <!-- אלמנטים דקורטיביים - נקודות צבעוניות -->
+      <div class="decorative-elements">
+        <div class="colored-dot dot-1"></div>
+        <div class="colored-dot dot-2"></div>
+        <div class="colored-dot dot-3"></div>
+        <div class="colored-dot dot-4"></div>
+        <div class="colored-dot dot-5"></div>
+        <div class="colored-dot dot-6"></div>
+      </div>
+  
+      <mat-card-content class="card-content" dir="rtl">
+        <!-- כותרת הכרטיס -->
+        <div class="card-header">
+            <h1 class="title" [@slideDown]>שלום מנהל!</h1>
+            <p class="subtitle">ברוכים הבאים! אנא הזן את פרטי הכניסה שלך.</p>
+          </div>
+          
+  
+        <!-- הודעת שגיאה במידה וקיימת -->
+        <div *ngIf="errorMessage" class="error-message">
+          <mat-error>{{ errorMessage }}</mat-error>
+        </div>
+  
+        <!-- הודעת הצלחה במידה וקיימת -->
+        <div *ngIf="successMessage" class="success-message">
+          <div class="success-alert">{{ successMessage }}</div>
+        </div>
+  
+        <!-- טופס התחברות -->
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+          <!-- שדה אימייל -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>אימייל</mat-label>
+            <input 
+              matInput 
+              type="email" 
+              formControlName="email" 
+              required>
+            <mat-icon matPrefix class="field-icon">email</mat-icon>
+            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              {{ getErrorMessage('email') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- שדה סיסמה -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>סיסמה</mat-label>
+            <input 
+              matInput 
+              [type]="hidePassword ? 'password' : 'text'" 
+              formControlName="password" 
+              required>
+            <mat-icon matPrefix class="field-icon">lock</mat-icon>
+            <button 
+              mat-icon-button 
+              matSuffix 
+              type="button"
+              (click)="togglePasswordVisibility()" 
+              [attr.aria-label]="'הצג סיסמה'" 
+              [attr.aria-pressed]="!hidePassword"
+              class="visibility-toggle">
+              <mat-icon>{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              {{ getErrorMessage('password') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- כפתור התחברות -->
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit" 
+            class="login-button"
+            [disabled]="isLoading || loginForm.invalid">
+            <mat-spinner *ngIf="isLoading" [diameter]="24" class="spinner"></mat-spinner>
+            <span *ngIf="isLoading">מתחבר...</span>
+            <span *ngIf="!isLoading">התחבר</span>
+          </button>
+        </form>
+  
+        <!-- אייקונים מסתובבים למטה -->
+        <div class="rotating-icons">
+          <mat-icon class="rotating-icon icon-1">palette</mat-icon>
+          <mat-icon class="rotating-icon icon-2">brush</mat-icon>
+          <mat-icon class="rotating-icon icon-3">color_lens</mat-icon>
+          <mat-icon class="rotating-icon icon-4">format_paint</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

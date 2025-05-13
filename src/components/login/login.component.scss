@@ -1,0 +1,338 @@
+// login.component.scss
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+// כהה לבהיר - הצבעים המרכזיים של האפליקציה
+$primary: #3498db;      // כחול בינוני
+$primary-light: #60a5fa; // כחול בהיר
+$primary-dark: #2874a6;  // כחול כהה
+$secondary: #7f8c8d;    // כחול פלדה
+$text-primary: #34495e;  // כחול כהה עבור טקסט
+$text-secondary: #5d768a; // כחול-אפור עבור טקסט משני
+$background: #f5f9ff;
+$white: #ffffff;
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: $white;
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+}
+
+// אלמנטים של הרקע
+.background-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.gradient-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.1;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  background: $primary-light;
+  top: -100px;
+  right: -100px;
+}
+
+.circle-2 {
+  width: 400px;
+  height: 400px;
+  background: $primary;
+  bottom: -150px;
+  left: -150px;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  background: $secondary;
+  top: 40%;
+  left: 60%;
+}
+
+.dots-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-size: 20px 20px;
+  background-position: -19px -19px;
+}
+
+// כרטיס התחברות
+.login-card {
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07) !important;
+  overflow: visible;
+  position: relative;
+  border-radius: 24px !important;
+  z-index: 1;
+  background: $white;
+  background-image: linear-gradient(to bottom right, $white, $background);
+  padding: 24px;
+}
+
+// לוגו
+.logo-container {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.logo-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+  box-shadow: 0 4px 20px rgba($primary, 0.25);
+  padding: 8px;
+}
+
+.logo {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+// אלמנטים דקורטיביים - נקודות צבעוניות
+.decorative-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.colored-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  
+  &.dot-1 {
+    top: 20px;
+    left: 20px;
+    width: 15px;
+    height: 15px;
+    background-color: $primary-light;
+    animation: scaleIn 0.4s ease-out 1s both;
+  }
+  
+  &.dot-2 {
+    top: 15px;
+    left: 40px;
+    width: 10px;
+    height: 10px;
+    background-color: $secondary;
+    animation: scaleIn 0.4s ease-out 1.1s both;
+  }
+  
+  &.dot-3 {
+    top: 30px;
+    left: 55px;
+    width: 12px;
+    height: 12px;
+    background-color: $primary;
+    animation: scaleIn 0.4s ease-out 1.2s both;
+  }
+  
+  &.dot-4 {
+    top: 15px;
+    right: 25px;
+    width: 12px;
+    height: 12px;
+    background-color: $secondary;
+    animation: scaleIn 0.4s ease-out 1s both;
+  }
+  
+  &.dot-5 {
+    top: 30px;
+    right: 40px;
+    width: 15px;
+    height: 15px;
+    background-color: $primary-light;
+    animation: scaleIn 0.4s ease-out 1.1s both;
+  }
+  
+  &.dot-6 {
+    top: 20px;
+    right: 60px;
+    width: 8px;
+    height: 8px;
+    background-color: $primary;
+    animation: scaleIn 0.4s ease-out 1.2s both;
+  }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+// תוכן הכרטיס
+.card-content {
+  padding-top: 24px;
+  padding-bottom: 16px;
+  margin-top: 16px;
+}
+
+.card-header {
+  margin-bottom: 32px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: $text-primary;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  color: $text-secondary;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+
+// הודעות שגיאה והצלחה
+.error-message {
+  margin-bottom: 24px;
+  animation: shake 0.5s;
+  direction: rtl;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.success-message {
+  margin-bottom: 24px;
+}
+
+.success-alert {
+  padding: 12px 16px;
+  background-color: rgba($primary, 0.1);
+  color: $primary-dark;
+  border-radius: 8px;
+  text-align: right;
+}
+
+// טופס התחברות
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.field-icon {
+  color: $primary;
+  margin-right: 8px;
+}
+
+.visibility-toggle {
+  transition: all 0.3s;
+  
+  &:hover {
+    background: rgba($primary, 0.08);
+  }
+}
+
+// כפתור התחברות
+.login-button {
+  padding: 12px;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, $primary 30%, $primary-light 90%);
+  box-shadow: 0 6px 20px rgba($primary, 0.3);
+  border-radius: 24px;
+  transition: transform 0.2s ease-in-out;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &:not(:disabled):hover {
+    transform: scale(1.03);
+  }
+  
+  &:not(:disabled):active {
+    transform: scale(0.98);
+  }
+}
+
+.spinner {
+  margin-right: 10px;
+}
+
+// אייקונים מסתובבים
+.rotating-icons {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.rotating-icon {
+  margin: 0 8px;
+  
+  &.icon-1 {
+    color: $secondary;
+    animation: rotate 15s linear infinite;
+  }
+  
+  &.icon-2 {
+    color: $primary;
+    animation: rotate 12s linear infinite;
+  }
+  
+  &.icon-3 {
+    color: $secondary;
+    animation: rotate 18s linear infinite;
+  }
+  
+  &.icon-4 {
+    color: $primary;
+    animation: rotate 14s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// תמיכה במסכים קטנים
+@media (max-width: 480px) {
+  .login-card {
+    max-width: 100%;
+  }
+}
