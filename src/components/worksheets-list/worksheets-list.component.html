@@ -58,13 +58,16 @@
           <span class="select-arrow">▼</span>
         </div>
       </div>
-      
+      <button class="elegant-button" [routerLink]="['/fileUpload']" matTooltip="להוספת ציור">
+        <mat-icon>+</mat-icon>
+      </button>
       <div class="filters-right">
         <div class="filters-count">מציג <span class="count-highlight">{{ filteredWorksheets.length }}</span> מתוך <span class="count-highlight">{{ worksheets.length }}</span> גיליונות</div>
       </div>
     </div>
     
     <div class="worksheets-list">
+      
       @for (sheet of filteredWorksheets; track sheet) {
         <div class="worksheet-item">
           <!-- כותרת וקטגוריה -->
@@ -97,9 +100,7 @@
         </div>
       }
     </div>
-    <button class="elegant-button" [routerLink]="['/fileUpload']" matTooltip="להוספת ציור">
-      <mat-icon>brush</mat-icon>
-    </button>
+  
     <!-- גרף התפלגות דירוגים -->
     <div class="stats-section">
       <div class="stats-left">

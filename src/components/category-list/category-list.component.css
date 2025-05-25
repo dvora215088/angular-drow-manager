@@ -1,4 +1,4 @@
-/* גיליון סגנון מושלם לקומפוננט רשימת קטגוריות */
+/* גיליון סגנון משופר לקומפוננט רשימת קטגוריות */
 
 /* משתני צבעים - מאפשרים שינוי קל של ערכת הצבעים */
 :root {
@@ -68,46 +68,76 @@
 .search-container {
   max-width: 400px;
   width: 100%;
+  position: relative;
 }
 
 .search-field {
   width: 100%;
 }
 
-/* עיצוב שדות תיבת החיפוש */
-::ng-deep .search-field .mat-mdc-form-field-flex {
-  background-color: white !important;
-  border-radius: 24px !important;
-  padding: 0 8px !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+/* עיצוב מחודש לתיבת החיפוש - יותר ברור ונגיש */
+::ng-deep .search-field .mat-mdc-form-field-wrapper {
+  width: 100% !important;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
-::ng-deep .search-field .mat-mdc-form-field-flex:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+::ng-deep .search-field .mat-mdc-form-field-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
-::ng-deep .search-field .mat-mdc-form-field-flex:focus-within {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+::ng-deep .search-field .mat-mdc-form-field-flex {
+  background: transparent !important;
+  border-radius: 12px !important;
+  padding: 8px 16px !important;
+  align-items: center !important;
 }
 
-::ng-deep .search-field .mdc-notched-outline__leading,
-::ng-deep .search-field .mdc-notched-outline__notch,
-::ng-deep .search-field .mdc-notched-outline__trailing {
-  border-color: transparent !important;
-}
-
-::ng-deep .search-field .mat-mdc-text-field-wrapper {
-  padding: 0 !important;
-}
-
-::ng-deep .search-field .mat-mdc-form-field-icon-prefix {
-  color: var(--primary-color);
-  margin-left: 8px;
+::ng-deep .search-field .mdc-notched-outline {
+  display: none !important;
 }
 
 ::ng-deep .search-field .mat-mdc-form-field-infix {
   padding: 12px 0 !important;
+  border: none !important;
+  min-height: auto !important;
+}
+
+::ng-deep .search-field .mat-mdc-input-element {
+  font-size: 15px !important;
+  color: var(--text-primary) !important;
+  font-weight: 400 !important;
+}
+
+::ng-deep .search-field .mat-mdc-input-element::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+::ng-deep .search-field .mat-mdc-floating-label {
+  top: 18px !important;
+  font-size: 14px !important;
+  color: var(--text-secondary) !important;
+  right: 48px !important;
+}
+
+::ng-deep .search-field .mat-mdc-form-field-icon-prefix {
+  color: var(--primary-color) !important;
+  margin-left: 12px !important;
+  margin-right: 8px !important;
+}
+
+::ng-deep .search-field .mat-mdc-form-field-icon-suffix {
+  margin-left: 8px !important;
+  margin-right: 12px !important;
+}
+
+::ng-deep .search-field .mat-mdc-form-field-focus-overlay {
+  background: transparent !important;
 }
 
 /* כפתור יצירת קטגוריה חדשה */
@@ -327,13 +357,24 @@
   box-shadow: var(--shadow-soft);
   overflow: hidden;
   transition: var(--transition-standard);
-  border-top: 4px solid var(--card-accent-color, var(--primary-color));
+  border-top: 4px solid var(--primary-color);
   background-color: white;
 }
 
 .category-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-large);
+}
+
+.category-card:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #333333;
+  z-index: 2;
 }
 
 .category-card::before {
@@ -343,10 +384,16 @@
   right: 0;
   width: 60px;
   height: 60px;
-  background-color: var(--card-accent-color, var(--primary-color));
+  background-color: var(--primary-color);
   opacity: 0.05;
   border-bottom-left-radius: 100%;
   pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.category-card:hover .category-card::before {
+  opacity: 0;
 }
 
 .category-content {
@@ -360,16 +407,6 @@
   display: flex;
   align-items: flex-start;
   flex: 1;
-}
-
-.category-badge {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-left: 16px;
-  margin-top: 6px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .category-details {
@@ -393,7 +430,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
   min-height: 42px;
 }
@@ -422,38 +458,195 @@
   line-height: 20px !important;
 }
 
-/* מצב עריכה */
+/* מצב עריכה משופר - עדין ומקצועי */
 .edit-container {
+  background: #fafbfc;
+  border-top: 1px solid #e5e7eb;
+  margin: 0;
   padding: 20px;
-  background-color: var(--secondary-light);
-  border-top: 1px solid var(--border-color);
+  position: relative;
+  animation: slideInEdit 0.25s ease-out;
 }
 
+.edit-container::before {
+  content: 'עריכה';
+  position: absolute;
+  top: -1px;
+  right: 16px;
+  background: #374151;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 0 0 6px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.edit-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--primary-color);
+}
+
+/* שדות עריכה עדינים ומקצועיים */
 ::ng-deep .edit-container .mat-mdc-form-field {
-  width: 100%;
-  margin-bottom: 16px;
+  width: 100% !important;
+  margin-bottom: 16px !important;
 }
 
-::ng-deep .edit-container .mdc-notched-outline__leading,
-::ng-deep .edit-container .mdc-notched-outline__notch,
-::ng-deep .edit-container .mdc-notched-outline__trailing {
-  border-width: 1px !important;
+::ng-deep .edit-container .mat-mdc-form-field-wrapper {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease !important;
 }
 
+::ng-deep .edit-container .mat-mdc-form-field-wrapper:hover {
+  border-color: #d1d5db !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+::ng-deep .edit-container .mat-mdc-form-field-flex {
+  background: transparent !important;
+  padding: 10px 12px !important;
+  border-radius: 6px !important;
+}
+
+::ng-deep .edit-container .mdc-notched-outline {
+  display: none !important;
+}
+
+::ng-deep .edit-container .mat-mdc-form-field-infix {
+  padding: 6px 0 !important;
+  border: none !important;
+  min-height: auto !important;
+}
+
+::ng-deep .edit-container .mat-mdc-input-element,
+::ng-deep .edit-container .mat-mdc-input-element textarea {
+  font-size: 14px !important;
+  color: var(--text-primary) !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+  resize: vertical !important;
+}
+
+::ng-deep .edit-container .mat-mdc-floating-label {
+  top: 16px !important;
+  font-size: 12px !important;
+  color: #6b7280 !important;
+  font-weight: 500 !important;
+  right: 12px !important;
+}
+
+::ng-deep .edit-container .mat-mdc-form-field-focus-overlay {
+  background: transparent !important;
+}
+
+/* כשהשדה במיקוד */
+::ng-deep .edit-container .mat-mdc-form-field-wrapper.mdc-text-field--focused {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 1px rgba(30, 136, 229, 0.2) !important;
+}
+
+/* כפתורי עריכה אלגנטיים */
 .edit-actions {
   display: flex;
   justify-content: flex-start;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px dashed rgba(30, 136, 229, 0.3);
+  position: relative;
+}
+
+.edit-actions::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
 }
 
 ::ng-deep .edit-actions .mat-mdc-raised-button {
-  border-radius: 20px !important;
-  padding: 0 16px !important;
+  border-radius: 10px !important;
+  padding: 0 24px !important;
+  height: 44px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: 0 3px 8px rgba(30, 136, 229, 0.3) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+::ng-deep .edit-actions .mat-mdc-raised-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+::ng-deep .edit-actions .mat-mdc-raised-button:hover::before {
+  left: 100%;
+}
+
+::ng-deep .edit-actions .mat-mdc-raised-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(30, 136, 229, 0.4) !important;
+}
+
+::ng-deep .edit-actions .mat-mdc-button {
+  border-radius: 10px !important;
+  padding: 0 24px !important;
+  height: 44px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border: 2px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+::ng-deep .edit-actions .mat-mdc-button:hover {
+  border-color: var(--primary-dark) !important;
+  background: rgba(30, 136, 229, 0.1) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(30, 136, 229, 0.2) !important;
 }
 
 ::ng-deep .edit-actions .mat-icon {
-  margin-left: 6px;
+  margin-left: 8px !important;
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* אנימציה לכניסה למצב עריכה */
+@keyframes slideInEdit {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* אנימציות בריחוף */
@@ -515,11 +708,16 @@
   right: 0;
   bottom: 0;
   height: 3px;
-  background: linear-gradient(to right, var(--card-accent-color, var(--primary-color)), transparent);
+  background: linear-gradient(to right, var(--primary-color), transparent);
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease;
-  z-index: -1;
+  z-index: 1;
+}
+
+.category-card:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .category-card:hover::after {
@@ -565,6 +763,15 @@
   .action-buttons {
     margin-top: 16px;
     justify-content: flex-end;
+    width: 100%;
+  }
+  
+  .edit-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .edit-actions button {
     width: 100%;
   }
 }

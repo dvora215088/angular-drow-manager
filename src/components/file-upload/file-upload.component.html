@@ -1,14 +1,14 @@
-<div class="rounded-paper">
-  <div class="blue-dot" style="top: 20px; left: 20px;"></div>
-  <div class="blue-dot" style="top: 30px; left: 50px;"></div>
-  <div class="blue-dot" style="top: 15px; left: 80px;"></div>
-  <div class="blue-dot" style="top: 20px; right: 20px;"></div>
-  <div class="blue-dot" style="top: 15px; right: 50px;"></div>
-  <div class="blue-dot" style="top: 30px; right: 80px;"></div>
+<div class="compact-paper">
+  <!-- נקודות דקורטיביות -->
+  <div class="blue-dot" style="top: 15px; left: 15px;"></div>
+  <div class="blue-dot" style="top: 20px; left: 40px;"></div>
+  <div class="blue-dot" style="top: 15px; right: 15px;"></div>
+  <div class="blue-dot" style="top: 20px; right: 40px;"></div>
 
   <h1 class="form-title" dir="rtl">העלאת ציור</h1>
 
   <form [formGroup]="uploadForm" dir="rtl">
+    <!-- שם הציור -->
     <div class="form-group">
       <div class="field-header">
         <span class="field-label">שם הציור</span>
@@ -20,6 +20,7 @@
       </mat-form-field>
     </div>
 
+    <!-- טווח גילאים -->
     <div class="form-group">
       <div class="field-header">
         <span class="field-label">טווח גילאים</span>
@@ -31,6 +32,7 @@
       </mat-form-field>
     </div>
 
+    <!-- רמת קושי -->
     <div class="form-group">
       <div class="field-header">
         <span class="field-label">בחר רמה</span>
@@ -46,7 +48,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Category Selection Field - Always visible -->
+    <!-- קטגוריה -->
     <div class="form-group">
       <div class="field-header">
         <span class="field-label">בחר קטגוריה</span>
@@ -54,16 +56,21 @@
       </div>
       <mat-form-field appearance="outline" class="custom-field">
         <mat-select formControlName="categoryId" placeholder="בחר קטגוריה">
-          <mat-option *ngIf="categoriesLoading">טוען קטגוריות...</mat-option>
+          @if (categoriesLoading) {
+            <mat-option>טוען קטגוריות...</mat-option>
+          }
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ category.categoryName }}
           </mat-option>
         </mat-select>
         <mat-icon matSuffix color="primary">category</mat-icon>
-        <mat-error *ngIf="uploadForm.get('categoryId')?.hasError('required')">קטגוריה היא שדה חובה</mat-error>
+        @if (uploadForm.get('categoryId')?.hasError('required')) {
+          <mat-error>קטגוריה היא שדה חובה</mat-error>
+        }
       </mat-form-field>
     </div>
 
+    <!-- העלאת קובץ -->
     <div class="form-group">
       <div class="field-header">
         <span class="field-label">בחר קובץ</span>
@@ -79,40 +86,42 @@
           <p class="upload-hint">PNG, PDF (מקסימום 10MB)</p>
         </label>
         
-        <div class="selected-file" *ngIf="file">
-          <mat-icon>insert_drive_file</mat-icon>
-          <span>{{ file.name }} ({{ (file.size / 1024).toFixed(2) }} KB)</span>
-        </div>
+        @if (file) {
+          <div class="selected-file">
+            <mat-icon>insert_drive_file</mat-icon>
+            <span>{{ file.name }} ({{ (file.size / 1024).toFixed(2) }} KB)</span>
+          </div>
+        }
       </div>
     </div>
 
-    <div *ngIf="error" class="error-alert">
-      <mat-icon>error</mat-icon>
-      {{ error }}
-    </div>
-
-    <div *ngIf="success" class="success-alert">
-      <mat-icon>check_circle</mat-icon>
-      הקובץ הועלה בהצלחה!
-    </div>
-
-    <!-- Animated floating icons at the bottom -->
-    <div class="floating-icons-container">
-      <div class="floating-icon" *ngFor="let icon of floatingIcons; let i = index" 
-           [ngStyle]="getIconStyle(i)">
-        <mat-icon [style.color]="icon.color">{{ icon.name }}</mat-icon>
+    <!-- הודעות שגיאה והצלחה -->
+    @if (error) {
+      <div class="error-alert">
+        <mat-icon>error</mat-icon>
+        {{ error }}
       </div>
-    </div>
+    }
 
+    @if (success) {
+      <div class="success-alert">
+        <mat-icon>check_circle</mat-icon>
+        הקובץ הועלה בהצלחה!
+      </div>
+    }
+
+    <!-- כפתור העלאה -->
     <div class="action-buttons" dir="rtl">
       <button mat-raised-button color="primary" class="upload-button"
               [disabled]="!file || uploading || uploadForm.invalid" (click)="uploadFile()">
-        <mat-icon *ngIf="!uploading">insert_drive_file</mat-icon>
-        <mat-spinner *ngIf="uploading" diameter="24"></mat-spinner>
-        {{ uploading ? 'מעלה...' : (isAdmin ? 'העלאת קובץ כמנהל' : 'העלאת קובץ') }}
+        @if (uploading) {
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>מעלה...</span>
+        } @else {
+          <mat-icon>cloud_upload</mat-icon>
+          <span>{{ isAdmin ? 'העלאת קובץ כמנהל' : 'העלאת קובץ' }}</span>
+        }
       </button>
-
-   
     </div>
   </form>
 </div>

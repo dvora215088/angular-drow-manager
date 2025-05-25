@@ -1,4 +1,4 @@
-// file-upload.component.scss
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
 
 // Variables
 $primary-color: #4285F4;
@@ -8,89 +8,89 @@ $success-color: #0F9D58;
 $paper-background: #ffffff;
 $shadow-color: rgba(0, 0, 0, 0.1);
 
-// Main container
-.rounded-paper {
+// Main container - קטן יותר
+.compact-paper {
+  font-family: 'Heebo', sans-serif;
   background-color: $paper-background;
   border-radius: 16px;
-  box-shadow: 0 8px 24px $shadow-color;
-  padding: 32px;
+  box-shadow: 0 6px 20px $shadow-color;
+  padding: 24px;
   position: relative;
   overflow: hidden;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 500px; // קטן יותר מ-800px
+  margin: 20px auto;
   transition: all 0.3s ease;
   
   &:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
   }
 }
 
-// Decorative blue dots
+// נקודות דקורטיביות - פחות
 .blue-dot {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 8px; // קטן יותר
+  height: 8px;
   border-radius: 50%;
   background-color: $primary-color;
-  opacity: 0.6;
-  transition: all 0.5s ease;
+  opacity: 0.5;
+  transition: all 0.3s ease;
   
   &:hover {
-    transform: scale(1.5);
-    opacity: 1;
+    transform: scale(1.3);
+    opacity: 0.8;
   }
 }
 
-// Form title
+// כותרת הטופס - קטנה יותר
 .form-title {
   color: $primary-color;
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 32px;
+  font-size: 1.8rem; // קטן יותר מ-2.2rem
+  margin-bottom: 24px; // קטן יותר מ-32px
   font-weight: 600;
   position: relative;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   
   &::after {
     content: '';
     position: absolute;
-    bottom: -8px;
-    left: 25%;
-    width: 50%;
-    height: 4px;
+    bottom: -6px;
+    left: 30%;
+    width: 40%; // קטן יותר
+    height: 3px;
     background: linear-gradient(to right, $primary-color, $accent-color);
     border-radius: 2px;
   }
 }
 
-// Form groups
+// קבוצות שדות - רווח קטן יותר
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 18px; // קטן יותר מ-24px
   position: relative;
 }
 
-// Field header styling
+// כותרת שדה
 .field-header {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px; // קטן יותר
 }
 
 .field-label {
   font-weight: 500;
   color: #333;
-  margin-right: 12px;
-  font-size: 1rem;
+  margin-right: 10px;
+  font-size: 0.95rem; // קטן יותר
 }
 
 .divider {
   flex: 1;
   height: 2px;
-  background: linear-gradient(to right, rgba(66, 133, 244, 0.5), rgba(66, 133, 244, 0.1));
+  background: linear-gradient(to right, rgba(66, 133, 244, 0.4), rgba(66, 133, 244, 0.1));
 }
 
-// Custom field styling
+// שדות מותאמים אישית
 .custom-field {
   width: 100%;
   
@@ -102,14 +102,18 @@ $shadow-color: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
   }
   
+  ::ng-deep .mat-form-field-infix {
+    padding: 10px 0; // קטן יותר
+  }
+  
   ::ng-deep .mat-select-arrow {
     color: $primary-color;
   }
 }
 
-// File upload area
+// אזור העלאת קבצים
 .file-upload-container {
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .file-upload-area {
@@ -119,182 +123,150 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   justify-content: center;
   border: 2px dashed $primary-color;
   border-radius: 8px;
-  padding: 24px;
+  padding: 20px; // קטן יותר מ-24px
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: rgba(66, 133, 244, 0.05);
+  background-color: rgba(66, 133, 244, 0.04);
   
   &:hover {
-    background-color: rgba(66, 133, 244, 0.1);
+    background-color: rgba(66, 133, 244, 0.08);
     border-color: darken($primary-color, 10%);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
   
   .file-icon {
-    font-size: 48px;
-    height: 48px;
-    width: 48px;
+    font-size: 36px; // קטן יותר מ-48px
+    height: 36px;
+    width: 36px;
     color: $primary-color;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   
   .upload-text {
-    font-size: 1.1rem;
-    margin: 8px 0;
+    font-size: 1rem; // קטן יותר
+    margin: 6px 0;
     color: #333;
     font-weight: 500;
   }
   
   .upload-hint {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #777;
     margin: 0;
   }
 }
 
-// Selected file display
+// קובץ נבחר
 .selected-file {
   display: flex;
   align-items: center;
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: rgba(15, 157, 88, 0.1);
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: rgba(15, 157, 88, 0.08);
   
   mat-icon {
     color: $accent-color;
-    margin-right: 12px;
+    margin-right: 10px;
   }
   
   span {
     color: #333;
     font-weight: 500;
+    font-size: 0.9rem;
   }
 }
 
-// Alert messages
+// הודעות התראה
 .error-alert, .success-alert {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin: 16px 0;
+  padding: 10px 14px; // קטן יותר
+  border-radius: 6px;
+  margin: 12px 0; // קטן יותר
+  font-size: 0.9rem;
   
   mat-icon {
-    margin-right: 12px;
+    margin-right: 10px;
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
   }
 }
 
 .error-alert {
-  background-color: rgba(219, 68, 55, 0.1);
+  background-color: rgba(219, 68, 55, 0.08);
   color: $error-color;
-  border-left: 4px solid $error-color;
+  border-left: 3px solid $error-color;
 }
 
 .success-alert {
-  background-color: rgba(15, 157, 88, 0.1);
+  background-color: rgba(15, 157, 88, 0.08);
   color: $success-color;
-  border-left: 4px solid $success-color;
+  border-left: 3px solid $success-color;
 }
 
-// Floating icons container
-.floating-icons-container {
-  position: relative;
-  height: 100px;
-  margin: 32px 0;
-  overflow: hidden;
-}
-
-.floating-icon {
-  position: absolute;
-  z-index: 1;
-  opacity: 0.8;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  transition: opacity 0.3s ease;
-  
-  mat-icon {
-    font-size: 32px;
-    height: 32px;
-    width: 32px;
-  }
-  
-  &:hover {
-    opacity: 1;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-    z-index: 2;
-  }
-}
-
-// Action buttons
+// כפתורי פעולה
 .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
-  
-  button {
-    min-width: 160px;
-    border-radius: 24px;
-    padding: 8px 24px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
-    &:hover:not([disabled]) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-    
-    mat-icon {
-      margin-right: 8px;
-    }
-  }
+  margin-top: 20px; // קטן יותר
   
   .upload-button {
-    background: linear-gradient(to right, $primary-color, darken($primary-color, 10%));
+    min-width: 140px; // קטן יותר
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(to right, $primary-color, darken($primary-color, 8%));
     
     &:hover:not([disabled]) {
-      background: linear-gradient(to right, darken($primary-color, 5%), darken($primary-color, 15%));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+      background: linear-gradient(to right, darken($primary-color, 3%), darken($primary-color, 12%));
     }
-  }
-  
-  .save-button {
-    background: linear-gradient(to right, $accent-color, darken($accent-color, 10%));
     
-    &:hover:not([disabled]) {
-      background: linear-gradient(to right, darken($accent-color, 5%), darken($accent-color, 15%));
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    mat-icon, mat-spinner {
+      margin-right: 6px;
+    }
+    
+    span {
+      font-size: 0.95rem;
     }
   }
 }
 
-// Enhanced material input styles
+// שיפורי Material Design
 ::ng-deep {
   .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: rgba(66, 133, 244, 0.5);
+    color: rgba(66, 133, 244, 0.4);
   }
   
   .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
     color: $primary-color;
   }
   
-  .mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 12px 0;
-  }
-  
   .mat-select-panel {
     border-radius: 8px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
   
   .mat-option {
     transition: all 0.2s ease;
+    font-family: 'Heebo', sans-serif;
     
     &:hover:not(.mat-option-disabled) {
-      background: rgba(66, 133, 244, 0.1);
+      background: rgba(66, 133, 244, 0.08);
     }
     
     &.mat-selected:not(.mat-option-multiple) {
-      background: rgba(66, 133, 244, 0.2);
+      background: rgba(66, 133, 244, 0.15);
     }
   }
   
@@ -308,26 +280,40 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   }
 }
 
-// Responsive adjustments
+// תגובתיות
 @media (max-width: 768px) {
-  .rounded-paper {
-    padding: 24px 16px;
+  .compact-paper {
+    padding: 20px 16px;
     border-radius: 12px;
+    margin: 16px;
+    max-width: none;
   }
   
   .form-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
   }
   
-  .action-buttons {
-    flex-direction: column;
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .file-upload-area {
+    padding: 16px;
     
-    button {
-      width: 100%;
+    .file-icon {
+      font-size: 32px;
+      height: 32px;
+      width: 32px;
+    }
+    
+    .upload-text {
+      font-size: 0.95rem;
     }
   }
   
-  .floating-icons-container {
-    height: 80px;
+  .action-buttons .upload-button {
+    width: 100%;
+    min-width: auto;
   }
 }
